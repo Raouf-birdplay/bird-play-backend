@@ -16,29 +16,22 @@ postRouter.get("/all", async (req, res) => {
       .select({
         comments: 0,
       });
-    res.send({ message: "Success", posts });
+    res.send({ message: "success", posts });
   } catch (error) {
-    res.status(400).send({ message: error });
+    res.status(400).send({ message: "error" });
   }
 });
 
-//! add post
-// postRouter.post("/add", async (req, res) => {
-//   const { page, limit } = req.query;
-//   try {
-//     const posts = await blogModel
-//       .find()
-//       .sort({ createdAt: -1 })
-//       .skip((page - 1) * limit)
-//       .limit(limit)
-//       .select({
-//         comments: 0,
-//       });
-//     res.send({ message: "Success", posts });
-//   } catch (error) {
-//     res.status(400).send({ message: error });
-//   }
-// });
+// add post
+postRouter.post("/add", async (req, res) => {
+  try {
+    let newPost = new faqModel(req.body);
+    await newPost.save();
+    res.send({ message: "success", post: newPost });
+  } catch (error) {
+    res.status(404).send({ message: "error" });
+  }
+});
 
 //delete admin
 // adminRouter.delete("/delete/:id", async (req, res) => {
