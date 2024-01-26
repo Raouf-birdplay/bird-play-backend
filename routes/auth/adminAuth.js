@@ -10,46 +10,6 @@ const adminAuthRouter = express.Router();
 adminAuthRouter.use(express.json());
 adminAuthRouter.use(express.urlencoded({ extended: true }));
 
-//! register new admin
-adminAuthRouter.post("/admin/register", async (req, res) => {
-  const sanitizedData = dataSanitizer(req.body);
-  if (!sanitizedData) {
-    return res.status(400).send({ message: "Invalid inputs" });
-  }
-  const { email, password } = sanitizedData;
-  try {
-    let user = await adminModel.findOne({ email });
-    if (user) {
-      return res.status(409).send({ message: "User already registered" });
-    }
-    if (validator.isStrongPassword(password) && validator.isEmail(email)) {
-      bcrypt.hash(password, 3, async (err, hash) => {
-        if (err) {
-          res.status(400).send({ message: "Error" });
-        } else if (hash) {
-          req.body.password = hash;
-
-          let newAdmin = new adminModel(req.body);
-          await newAdmin.save();
-          let admin = await adminModel.findOne({ email });
-          let token = jwt.sign({ email: admin.email, id: admin._id }, secret, {
-            expiresIn: "7d",
-          });
-          res.send({
-            message: "Registration successful",
-            token,
-            user: admin,
-          });
-        }
-      });
-    } else {
-      res.status(400).send({ message: "Invalid inputs" });
-    }
-  } catch (err) {
-    res.status(500).send({ message: "Internal server error" });
-  }
-});
-
 //!admin login
 adminAuthRouter.post("/admin/login", async (req, res) => {
   const sanitizedData = dataSanitizer(req.body);
