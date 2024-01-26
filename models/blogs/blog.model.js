@@ -7,6 +7,8 @@ const blogSchema = new mongoose.Schema(
     image: { type: String },
     isPinned: { type: Boolean, default: false },
     pinCode: { type: Number, default: 0 },
+    createdAt: { type: Number },
+    noOfComments: { type: Number },
     comments: [
       {
         userName: { type: Boolean, default: true },

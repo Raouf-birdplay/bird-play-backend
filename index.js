@@ -18,10 +18,13 @@ app.set("trust proxy", ["loopback", "linklocal", "uniquelocal"]);
 const { adminAuthRouter } = require("./routes/auth/adminAuth");
 const { adminRouter } = require("./routes/users/admin");
 const { contactRouter } = require("./routes/general/contact");
+const { postRouter } = require("./routes/post/post");
+
 app.use(express.json());
 app.use("/auth", adminAuthRouter);
 app.use("/admin", adminRouter);
 app.use("/contact", contactRouter);
+app.use("/post", postRouter);
 
 server.listen(PORT, async () => {
   try {
