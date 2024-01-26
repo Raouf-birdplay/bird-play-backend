@@ -25,11 +25,11 @@ postRouter.get("/all", async (req, res) => {
 // add post
 postRouter.post("/add", async (req, res) => {
   try {
-    let newPost = new faqModel(req.body);
+    let newPost = new blogModel(req.body);
     await newPost.save();
     res.send({ message: "success", post: newPost });
   } catch (error) {
-    res.status(404).send({ message: "error" });
+    res.status(404).send({ message: error });
   }
 });
 
