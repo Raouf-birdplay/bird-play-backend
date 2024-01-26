@@ -20,6 +20,7 @@ const { adminRouter } = require("./routes/users/admin");
 const { contactRouter } = require("./routes/general/contact");
 app.use(express.json());
 app.use("/auth", adminAuthRouter);
+app.use("/", "hello");
 app.use("/admin", adminRouter);
 app.use("/contact", contactRouter);
 
