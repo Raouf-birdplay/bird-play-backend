@@ -22,6 +22,16 @@ postRouter.get("/all", async (req, res) => {
   }
 });
 
+//! get single post
+courseRouter.get("/details/:id", async (req, res) => {
+  try {
+    let post = await blogModel.findById(req.params.id);
+    res.send({ post });
+  } catch (error) {
+    res.status(404).send({ message: "error" });
+  }
+});
+
 // add post
 postRouter.post("/add", async (req, res) => {
   try {
@@ -29,7 +39,7 @@ postRouter.post("/add", async (req, res) => {
     await newPost.save();
     res.send({ message: "success", post: newPost });
   } catch (error) {
-    res.status(404).send({ message: error });
+    res.status(404).send({ message: "error" });
   }
 });
 
