@@ -43,6 +43,30 @@ postRouter.post("/add", async (req, res) => {
   }
 });
 
+postRouter.post("/comment/add/:id", async (req, res) => {
+  const { id } = req.params;
+  const { userName, comment } = req.body;
+
+  try {
+    const post = await blogModel.findById(id);
+    if (!post) {
+      return res.status(404).send({ message: "Post not found" });
+    }
+
+    post.comments.push({
+      userName: userName || "Anonymous145",
+      comment,
+      date: Date.now(),
+    });
+
+    await post.save();
+
+    res.send({ message: "Comment added successfully", post });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 //delete admin
 // adminRouter.delete("/delete/:id", async (req, res) => {
 //   const { id } = req.params;
