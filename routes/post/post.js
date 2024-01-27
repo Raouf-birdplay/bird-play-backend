@@ -23,7 +23,7 @@ postRouter.get("/all", async (req, res) => {
 });
 
 //! get single post
-courseRouter.get("/details/:id", async (req, res) => {
+postRouter.get("/details/:id", async (req, res) => {
   try {
     let post = await blogModel.findById(req.params.id);
     res.send({ post });
