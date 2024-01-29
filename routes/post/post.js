@@ -35,7 +35,8 @@ postRouter.get("/details/:id", async (req, res) => {
 // add post
 postRouter.post("/add", async (req, res) => {
   try {
-    let newPost = new blogModel(req.body);
+    let data = req.body;
+    let newPost = new blogModel({ ...data, createdAt: Date.now() });
     await newPost.save();
     res.send({ message: "success", post: newPost });
   } catch (error) {
