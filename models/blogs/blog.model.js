@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
   {
-    title: { type: String },
-    desc: { type: String },
-    image: { type: String },
+    image: { type: String , required: true},
     isPinned: { type: Boolean, default: false },
     pinCode: { type: Number, default: 0 },
     noOfComments: { type: Number },
