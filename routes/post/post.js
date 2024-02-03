@@ -55,7 +55,7 @@ postRouter.post("/comment/add/:id", async (req, res) => {
     }
 
     post.comments.push({
-      userName: userName || "Anonymous145",
+      userName: userName,
       comment,
       date: Date.now(),
     });

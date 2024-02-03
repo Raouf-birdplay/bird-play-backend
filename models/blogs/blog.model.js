@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema(
     noOfComments: { type: Number },
     comments: [
       {
-        userName: { type: Boolean, default: true },
+        userName: { type: String, default: "Anonymous145" },
         comment: { type: String },
         date: { type: Number },
       },
