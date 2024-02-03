@@ -62,7 +62,7 @@ postRouter.post("/comment/add/:id", async (req, res) => {
 
     await post.save();
 
-    res.send({ message: "Comment added successfully", post });
+    res.send({ message: "Comment added successfully", post: post.comments });
   } catch (error) {
     res.status(500).send({ message: error });
   }
