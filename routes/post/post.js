@@ -79,4 +79,16 @@ postRouter.delete("/delete/:id", async (req, res) => {
   }
 });
 
+//! update blogs
+
+blogRouter.patch("/update/:id", async (req, res) => {
+  try {
+    let post = await blogModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.send({ message: "Success", post });
+  } catch (error) {
+    res.status(404).send({ message: "Error" });
+  }
+});
 module.exports = { postRouter };
