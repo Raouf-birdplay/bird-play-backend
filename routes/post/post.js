@@ -68,15 +68,15 @@ postRouter.post("/comment/add/:id", async (req, res) => {
   }
 });
 
-//delete admin
-// adminRouter.delete("/delete/:id", async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     await adminModel.findByIdAndDelete({ _id: id });
-//     res.send({ message: "User Deleted!" });
-//   } catch (error) {
-//     res.status(400).send({ message: "Error" });
-//   }
-// });
+// delete post
+postRouter.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await blogModel.findByIdAndDelete({ _id: id });
+    res.send({ message: "Post Deleted!" });
+  } catch (error) {
+    res.status(400).send({ message: "Error" });
+  }
+});
 
 module.exports = { postRouter };
