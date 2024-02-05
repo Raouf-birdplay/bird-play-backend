@@ -12,10 +12,7 @@ postRouter.get("/all", async (req, res) => {
       .find()
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
-      .limit(limit)
-      .select({
-        comments: 0,
-      });
+      .limit(limit);
     res.send({ message: "success", posts });
   } catch (error) {
     res.status(400).send({ message: "error" });
